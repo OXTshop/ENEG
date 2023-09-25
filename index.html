@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Menu Lateral com Gráficos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Estilos para o layout básico */
@@ -54,14 +55,15 @@
             padding: 20px;
         }
 
-        /* Estilos para os gráficos (tamanho fictício) */
+        /* Estilos para os gráficos */
         .chart-container {
-            display: none; /* Inicialmente oculto */
+            display: none;
         }
 
         .chart {
-            width: 900px;
-            height: 700px;
+            width: 700px; /* Use 100% da largura do container */
+            max-width: 700px; /* Defina um tamanho máximo para o gráfico */
+            height: auto; /* Redimensione a altura de acordo com a largura */
             margin: 5px;
         }
     </style>
@@ -92,39 +94,66 @@
     </div>
 
     <script>
+         // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyBUgz8UXm3C3ETf63T8c5xWMf9-4SgsVIc",
+            authDomain: "energy-tcc.firebaseapp.com",
+            databaseURL: "https://energy-tcc-default-rtdb.firebaseio.com",
+            projectId: "energy-tcc",
+            storageBucket: "energy-tcc.appspot.com",
+            messagingSenderId: "38598782344",
+            appId: "1:38598782344:web:b3197db7a677dcf0375e3d",
+            measurementId: "G-RQHZETFYLT"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        console.log(firebaseConfig);
+
+
         let currentChart = null;
 
-        function mostrarGrafico(id) {
+        function mostrarGrafico(id){
             if (currentChart) {
                 currentChart.style.display = 'none';
             }
 
             const chartContainer = document.getElementById(id + '-container');
             chartContainer.style.display = 'block';
-
+            
             currentChart = chartContainer;
 
             const ctx = document.getElementById(id).getContext('2d');
             let data;
+            let total; // Variável para armazenar a soma total
 
-            // Define dados diferentes para cada gráfico
             if (id === 'chart1') {
-                        //'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set'
-                data = [    59,   65,    69,    59,    57,     63,   70,    61,   78];
+                data = [245, 260, 268, 278, 269, 259, 289, 279, 298];
             } else if (id === 'chart2') {
-                data = [    68,   79,    74,    78,    79,     76,   75,    78,   72];
+                data = [68, 79, 74, 78, 79, 76, 75, 78, 72];
             } else if (id === 'chart3') {
-                data = [    68,   79,    74,    78,    79,     76,   75,    78,   72];
+                data = [68, 79, 74, 78, 79, 76, 75, 78, 72];
             } else if (id === 'chart4') {
-                data = [    68,   79,    74,    78,    79,     76,   75,    78,   72];
+                data = [68, 79, 74, 78, 79, 76, 75, 78, 72];
             }
+
+            // Calcular a soma total dos valores de janeiro a setembro
+            total = data.reduce((acc, value) => acc + value, 0);
 
             const chart = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set'],
                     datasets: [{
-                        label: 'Valores até Setembro',
+                        label: 'CONSUMO',
                         data: data,
                         backgroundColor: 'rgba(75, 150, 2, 1)',
                         borderColor: 'rgba(75, 192, 192, 1)',
@@ -134,7 +163,9 @@
                 options: {
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            suggestedMax: 1000 // Define um valor sugerido máximo para o eixo Y
+
                         }
                     }
                 }
@@ -142,4 +173,5 @@
         }
     </script>
 </body>
+
 </html>
