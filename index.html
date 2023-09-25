@@ -2,154 +2,57 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
     <title>Menu Lateral com Gráficos</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        /* Estilos para o layout básico */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            height: 100vh;
-        }
-
-        #sidebar {
-            width: 20%;
-            background-color: #333;
-            color: white;
-            padding: 20px;
-        }
-
-        #sidebar h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        #sidebar ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        #sidebar li {
-            margin-bottom: 10px;
-        }
-
-        #sidebar a {
-            text-decoration: none;
-            color: white;
-            font-size: 18px;
-        }
-
-        #sidebar a:hover {
-            text-decoration: underline;
-        }
-
-        #content {
-            flex: 1;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        /* Estilos para os gráficos */
-        .chart-container {
-            display: none;
-        }
-
-        .chart {
-            width: 700px; /* Use 100% da largura do container */
-            max-width: 700px; /* Defina um tamanho máximo para o gráfico */
-            height: auto; /* Redimensione a altura de acordo com a largura */
-            margin: 5px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <div id="sidebar">
         <h2>Menu Lateral</h2>
         <ul>
-            <li><a href="#" onclick="mostrarGrafico('chart1')">Casa 1</a></li>
-            <li><a href="#" onclick="mostrarGrafico('chart2')">Casa 2</a></li>
-            <li><a href="#" onclick="mostrarGrafico('chart3')">Gráfico 3</a></li>
-            <li><a href="#" onclick="mostrarGrafico('chart4')">Gráfico 4</a></li>
+            <li><a href="#" onclick="mostrarGrafico('chart1')">SISTEMAS GERAL</a></li>
+            <li><a href="#" onclick="mostrarGrafico('chart2')">SALA</a></li>
+            <li><a href="#" onclick="mostrarGrafico('chart3')">QUARTO</a></li>
+            <li><a href="#" onclick="mostrarGrafico('chart4')">BANHEIRO</a></li>
         </ul>
     </div>
     <div id="content">
         <div class="chart-container" id="chart1-container">
+            <label>Todo sistema</label>
             <canvas id="chart1" class="chart"></canvas>
+            <div class="button-group">
+                <h3>Sistema de ativação e desativação energetica</h3>
+                <h3>Chuveiro</h3>
+                <button class="button green-button" onclick="alterarEstado('Chuveiro', true)">Ligar</button>
+                <button class="button red-button" onclick="alterarEstado('Chuveiro', false)">Desligar</button>
+            </div>
         </div>
         <div class="chart-container" id="chart2-container">
             <canvas id="chart2" class="chart"></canvas>
+            <div class="button-group">
+                <h3>Luzes</h3>
+                <button class="button green-button" onclick="alterarEstado('Luzes', true)">Ligar</button>
+                <button class="button red-button" onclick="alterarEstado('Luzes', false)">Desligar</button>
+            </div>
         </div>
         <div class="chart-container" id="chart3-container">
             <canvas id="chart3" class="chart"></canvas>
+            <div class="button-group">
+                <h3>TV</h3>
+                <button class="button green-button" onclick="alterarEstado('TV', true)">Ligar</button>
+                <button class="button red-button" onclick="alterarEstado('TV', false)">Desligar</button>
+            </div>
         </div>
         <div class="chart-container" id="chart4-container">
             <canvas id="chart4" class="chart"></canvas>
+            <div class="button-group">
+                <h3>Dispositivo 4</h3>
+                <button class="button green-button" onclick="alterarEstado('Dispositivo4', true)">Ligar</button>
+                <button class="button red-button" onclick="alterarEstado('Dispositivo4', false)">Desligar</button>
+            </div>
         </div>
     </div>
 
-    <script>
-        
-        let currentChart = null;
-
-        function mostrarGrafico(id){
-            if (currentChart) {
-                currentChart.style.display = 'none';
-            }
-
-            const chartContainer = document.getElementById(id + '-container');
-            chartContainer.style.display = 'block';
-            
-            currentChart = chartContainer;
-
-            const ctx = document.getElementById(id).getContext('2d');
-            let data;
-            let total; // Variável para armazenar a soma total
-
-            if (id === 'chart1') {
-                data = [245, 260, 268, 278, 269, 259, 289, 279, 298];
-            } else if (id === 'chart2') {
-                data = [68, 79, 74, 78, 79, 76, 75, 78, 72];
-            } else if (id === 'chart3') {
-                data = [68, 79, 74, 78, 79, 76, 75, 78, 72];
-            } else if (id === 'chart4') {
-                data = [68, 79, 74, 78, 79, 76, 75, 78, 72];
-            }
-
-            // Calcular a soma total dos valores de janeiro a setembro
-            total = data.reduce((acc, value) => acc + value, 0);
-
-            const chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set'],
-                    datasets: [{
-                        label: 'CONSUMO',
-                        data: data,
-                        backgroundColor: 'rgba(75, 150, 2, 1)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            suggestedMax: 1000 // Define um valor sugerido máximo para o eixo Y
-
-                        }
-                    }
-                }
-            });
-        }
-    </script>
-    
+    <script src="script.js"></script>
 </body>
-
 </html>

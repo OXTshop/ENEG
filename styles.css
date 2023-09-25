@@ -1,18 +1,18 @@
-
 /* Estilos para o layout básico */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
     height: 100vh;
+    background-color: #807e7e;
 }
 
 #sidebar {
-    width: 20%;
-    background-color: #333;
+    background-color: #2c3e50;
     color: white;
     padding: 20px;
+    transition: width 0.3s; 
 }
 
 #sidebar h2 {
@@ -40,7 +40,7 @@ body {
 }
 
 #content {
-    flex: 1;
+    flex: 2;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -48,12 +48,74 @@ body {
     padding: 20px;
 }
 
-/* Estilos para os gráficos (tamanho fictício) */
-.chart {
-    width: 8cm;
-    height: 8cm;
-    background-color: lightgray;
+/* Estilos para os gráficos */
+.chart-container {
+    display: none;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
     margin: 10px;
-    padding: 10px;
-    text-align: center;
 }
+
+.chart {
+    width: 1000px; /* Use 100% da largura do container */
+    max-width: 150%; /* Defina um tamanho máximo para o gráfico */
+    height: auto; /* Redimensione a altura de acordo com a largura */
+}
+
+/*
+
+#sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    transition: width 0.3s; 
+}
+
+#sidebar h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#sidebar li {
+    margin-bottom: 10px;
+}
+
+#sidebar a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+
+#sidebar a:hover {
+    text-decoration: underline;
+}
+
+ Estilos para os botões 
+.button-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    margin-bottom: 10px;
+    background-color: #3498db; Cor de fundo dos botões 
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;  Animação de transição de cor de fundo 
+}
+
+.button:hover {
+    background-color: #2980b9; 
+}
+
+*/
