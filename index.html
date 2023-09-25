@@ -173,6 +173,20 @@
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
         console.log(firebaseConfig);
+
+        var database = firebase.database();
+        var ref = database.ref("/"); // Isso irá apontar para a raiz do seu banco de dados
+
+        // Lendo os dados do nó
+        ref.once("value")
+        .then(function(snapshot) {
+            var data = snapshot.val();
+            console.log(data); // Os dados do seu banco de dados
+        })
+        .catch(function(error) {
+            console.error("Erro ao ler dados: " + error);
+        });
+        console.log(database);
     </script>
 </body>
 
