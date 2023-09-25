@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Menu Lateral com Gráficos</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Estilos para o layout básico */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        #sidebar {
+            width: 20%;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+        }
+
+        #sidebar h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        #sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #sidebar li {
+            margin-bottom: 10px;
+        }
+
+        #sidebar a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+        }
+
+        #sidebar a:hover {
+            text-decoration: underline;
+        }
+
+        #content {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Estilos para os gráficos (tamanho fictício) */
+        .chart-container {
+            display: none; /* Inicialmente oculto */
+        }
+
+        .chart {
+            width: 900px;
+            height: 700px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar">
+        <h2>Menu Lateral</h2>
+        <ul>
+            <li><a href="#" onclick="mostrarGrafico('chart1')">Casa 1</a></li>
+            <li><a href="#" onclick="mostrarGrafico('chart2')">Casa 2</a></li>
+            <li><a href="#" onclick="mostrarGrafico('chart3')">Gráfico 3</a></li>
+            <li><a href="#" onclick="mostrarGrafico('chart4')">Gráfico 4</a></li>
+        </ul>
+    </div>
+    <div id="content">
+        <div class="chart-container" id="chart1-container">
+            <canvas id="chart1" class="chart"></canvas>
+        </div>
+        <div class="chart-container" id="chart2-container">
+            <canvas id="chart2" class="chart"></canvas>
+        </div>
+        <div class="chart-container" id="chart3-container">
+            <canvas id="chart3" class="chart"></canvas>
+        </div>
+        <div class="chart-container" id="chart4-container">
+            <canvas id="chart4" class="chart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        let currentChart = null;
+
+        function mostrarGrafico(id) {
+            if (currentChart) {
+                currentChart.style.display = 'none';
+            }
+
+            const chartContainer = document.getElementById(id + '-container');
+            chartContainer.style.display = 'block';
+
+            currentChart = chartContainer;
+
+            const ctx = document.getElementById(id).getContext('2d');
+            let data;
+
+            // Define dados diferentes para cada gráfico
+            if (id === 'chart1') {
+                        //'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set'
+                data = [    59,   65,    69,    59,    57,     63,   70,    61,   78];
+            } else if (id === 'chart2') {
+                data = [    68,   79,    74,    78,    79,     76,   75,    78,   72];
+            } else if (id === 'chart3') {
+                data = [    68,   79,    74,    78,    79,     76,   75,    78,   72];
+            } else if (id === 'chart4') {
+                data = [    68,   79,    74,    78,    79,     76,   75,    78,   72];
+            }
+
+            const chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set'],
+                    datasets: [{
+                        label: 'Valores até Setembro',
+                        data: data,
+                        backgroundColor: 'rgba(75, 150, 2, 1)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
