@@ -19,8 +19,14 @@ function mostrarGrafico(id) {
         data = chart1Data;
         suggestedMax = 600;
     } else if (id === 'chart2' || id === 'chart3' || id === 'chart4') {
-        data = [68, 79, 74, 78, 79, 76, 75, 78, 72];
-        suggestedMax = 300;
+        data = [12, 14, 8, 10, 9, 13, 14, 12, 8];
+        suggestedMax = 50;
+    }else if (id == 'chart3'){
+        data = [ 6,  9, 4,  8, 4,  6,  9,  5, 4];
+        suggestedMax = 50;
+    }else if (id = 'chart4'){
+        data = [ 8,  9, 3,  7, 4,  5,  5,  8, 2];
+        suggestedMax= 50;
     }
 
     const chart = new Chart(ctx, {
