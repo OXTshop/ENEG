@@ -20,13 +20,13 @@ function mostrarGrafico(id) {
         suggestedMax = 600;
     } if (id === 'chart2' || id === 'chart3' || id === 'chart4') {
         data = [12, 14, 8, 10, 9, 13, 14, 12, 8];
-        suggestedMax = 50;
+        suggestedMax = 30;
     }if (id == 'chart3'){
         data = [ 6,  9, 4,  8, 4,  6,  9,  5, 4];
-        suggestedMax = 50;
+        suggestedMax = 30;
     }if (id = 'chart4'){
         data = [ 2,  4, 3,  5, 2,  3,  6,  2, 5];
-        suggestedMax= 50;
+        suggestedMax= 30;
     }
 
     const chart = new Chart(ctx, {
