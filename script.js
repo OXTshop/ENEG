@@ -25,7 +25,7 @@ function mostrarGrafico(id) {
         data = [ 6,  9, 4,  8, 4,  6,  9,  5, 4];
         suggestedMax = 50;
     }if (id = 'chart4'){
-        data = [ 8,  9, 3,  7, 4,  5,  5,  8, 2];
+        data = [ 2,  4, 3,  5, 2,  3,  6,  2, 5];
         suggestedMax= 50;
     }
 
@@ -64,7 +64,7 @@ function alterarEstado(dispositivo, ligado) {
 // Calcular a soma total dos valores dos gráficos 2, 3 e 4 para o chart1
 const chart2Data = [12, 14, 8, 10, 9, 13, 14, 12, 8];
 const chart3Data = [ 6,  9, 4,  8, 4,  6,  9,  5, 4];
-const chart4Data = [ 8,  9, 3,  7, 4,  5,  5,  8, 2];
+const chart4Data = [ 2,  4, 3,  5, 2,  3,  6,  2, 5];
 const chart1Data = chart2Data.map((value, index) => value + chart3Data[index] + chart4Data[index]);
 
 // Mostrar o chart1 inicialmente
